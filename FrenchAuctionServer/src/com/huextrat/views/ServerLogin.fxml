@@ -39,7 +39,7 @@
                                           <Font name="Roboto Medium" size="14.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXButton fx:id="buttonCreateServer" layoutX="169.0" layoutY="189.0" onAction="#createServer" prefHeight="32.0" prefWidth="128.0" style="-fx-background-color: #2196f3;" text="Create server" textFill="WHITE">
+                                    <JFXButton fx:id="buttonCreateServer" layoutX="169.0" layoutY="189.0" onAction="#createServer" prefHeight="32.0" prefWidth="128.0" style="-fx-background-color: #2196f3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="Create server" textFill="WHITE">
                                        <font>
                                           <Font name="Roboto Bold" size="14.0" />
                                        </font>

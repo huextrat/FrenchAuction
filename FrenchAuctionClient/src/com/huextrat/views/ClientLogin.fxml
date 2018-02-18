@@ -38,7 +38,7 @@
                                           <Font name="Roboto Medium" size="14.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXButton fx:id="login" layoutX="185.0" layoutY="221.0" onAction="#loginButtonAction" prefHeight="32.0" prefWidth="100.0" style="-fx-background-color: #2196f3;" text="Login" textFill="WHITE">
+                                    <JFXButton fx:id="login" layoutX="185.0" layoutY="221.0" onAction="#loginButtonAction" prefHeight="32.0" prefWidth="100.0" style="-fx-background-color: #2196f3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="Login" textFill="WHITE">
                                        <font>
                                           <Font name="Roboto Bold" size="14.0" />
                                        </font>

@@ -17,7 +17,7 @@
 
 <AnchorPane maxHeight="700.0" maxWidth="1040.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.huextrat.server.ServerMainController">
    <children>
-      <JFXButton fx:id="buttonSend" layoutX="938.0" layoutY="657.0" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="38.0" prefWidth="91.0" ripplerFill="WHITE" style="-fx-background-radius: 10; -fx-background-color: #2196f3; -fx-border-radius: 10;" styleClass="sendbutton" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="11.0" />
+      <JFXButton fx:id="buttonSend" layoutX="938.0" layoutY="657.0" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="38.0" prefWidth="91.0" ripplerFill="WHITE" style="-fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: #2196f3; -fx-border-radius: 10;" styleClass="sendbutton" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="11.0" />
       <TextField fx:id="messageBox" layoutX="7.0" layoutY="658.0" onKeyPressed="#sendMethod" prefHeight="38.0" prefWidth="481.0" promptText="Message" style="-fx-border-radius: 0;" styleClass="messageInput" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="112.0" />
       <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutY="352.0" pannable="true" prefHeight="301.0" prefWidth="1040.0" vvalue="1.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="352.0">
          <content>
@@ -61,17 +61,17 @@
                         </Label>
                      </children>
                   </HBox>
-                  <JFXListView fx:id="userList" prefHeight="224.0" prefWidth="217.0" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
+                  <JFXListView fx:id="userList" prefHeight="224.0" prefWidth="217.0" style="-fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-border-radius: 4;" />
                </children>
             </VBox>
-            <AnchorPane layoutX="254.0" layoutY="14.0" prefHeight="334.0" prefWidth="426.0" style="-fx-background-color: #ffffff; -fx-background-radius: 4; -fx-border-radius: 4;">
+            <AnchorPane layoutX="254.0" layoutY="14.0" prefHeight="334.0" prefWidth="426.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-border-radius: 4;">
                <children>
                   <Text fx:id="time" fill="#2196f3" layoutX="212.0" layoutY="33.0" strokeWidth="0.0" text="00:00:00" textAlignment="CENTER">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Text>
-                  <AnchorPane layoutX="10.0" layoutY="46.0" prefHeight="272.0" prefWidth="406.0" style="-fx-background-color: #2196f3; -fx-background-radius: 4; -fx-border-radius: 4;">
+                  <AnchorPane layoutX="10.0" layoutY="46.0" prefHeight="272.0" prefWidth="406.0" style="-fx-background-color: #2196f3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-border-radius: 4;">
                      <children>
                         <Text fill="WHITE" layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
                            <font>
@@ -122,9 +122,9 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="689.0" layoutY="46.0" prefHeight="301.0" prefWidth="337.0" style="-fx-background-color: #ffffff; -fx-background-radius: 4; -fx-border-radius: 4;">
+            <AnchorPane layoutX="689.0" layoutY="46.0" prefHeight="301.0" prefWidth="337.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-border-radius: 4;">
                <children>
-                  <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="272.0" prefWidth="310.0" style="-fx-background-color: #2196f3; -fx-background-radius: 4; -fx-border-radius: 4;">
+                  <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="272.0" prefWidth="310.0" style="-fx-background-color: #2196f3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-border-radius: 4;">
                      <children>
                         <Text fill="WHITE" layoutX="83.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create new auction:">
                            <font>
@@ -149,7 +149,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <JFXButton fx:id="closeServer" layoutX="780.0" layoutY="9.0" onAction="#closeServerButton" prefHeight="25.0" prefWidth="155.0" style="-fx-background-color: #ffffff;" text="Close server" textFill="#2196f3">
+            <JFXButton fx:id="closeServer" layoutX="780.0" layoutY="9.0" onAction="#closeServerButton" prefHeight="25.0" prefWidth="155.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="Close server" textFill="#2196f3">
                <font>
                   <Font size="13.0" />
                </font>
