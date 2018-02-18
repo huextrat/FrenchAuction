@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.huextrat.chat;
+package com.huextrat.client;
 
 import com.huextrat.login.LoginController;
 import com.huextrat.messages.Message;
@@ -46,13 +46,13 @@ public class Listener implements Runnable{
     public String hostname;
     public int port;
     public String username;
-    public ChatController controller;
+    public ClientMainController controller;
     private ObjectOutputStream oos;
     private InputStream is;
     private ObjectInputStream input;
     private OutputStream outputStream;
 
-    public Listener(String hostname, int port, String username, ChatController controller) {
+    public Listener(String hostname, int port, String username, ClientMainController controller) {
         this.hostname = hostname;
         this.port = port;
         this.username = username;

@@ -34,7 +34,7 @@ import javafx.stage.Stage;
  * 
  * @author huextrat <extrat.h@gmail.com> <www.hugoextrat.com>
  */
-public class MainLauncher extends Application {
+public class StartClient extends Application {
 
     private static Stage primaryStageObj;
 

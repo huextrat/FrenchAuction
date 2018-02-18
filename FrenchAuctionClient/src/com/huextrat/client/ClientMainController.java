@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.huextrat.chat;
+package com.huextrat.client;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
@@ -60,7 +60,7 @@ import javafx.scene.text.Text;
  * 
  * @author huextrat <extrat.h@gmail.com> <www.hugoextrat.com>
  */
-public class ChatController implements Initializable {
+public class ClientMainController implements Initializable {
 
     @FXML private TextField messageBox;
     @FXML private Label usernameLabel;

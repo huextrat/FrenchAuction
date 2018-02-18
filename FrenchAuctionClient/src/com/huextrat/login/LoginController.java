@@ -23,8 +23,8 @@
  */
 package com.huextrat.login;
 
-import com.huextrat.chat.ChatController;
-import com.huextrat.chat.Listener;
+import com.huextrat.client.ClientMainController;
+import com.huextrat.client.Listener;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -52,7 +52,7 @@ public class LoginController implements Initializable {
     @FXML public  JFXTextField hostnameTextField;
     @FXML private JFXTextField portTextField;
     @FXML private JFXTextField usernameTextField;
-    public static ChatController con;
+    public static ClientMainController con;
     private Scene scene;
 
     private static LoginController instance;
@@ -95,7 +95,7 @@ public class LoginController implements Initializable {
 
             FXMLLoader fmxlLoader = new FXMLLoader(getClass().getClassLoader().getResource("com/huextrat/views/ClientMain.fxml"));
             Parent window = (Pane) fmxlLoader.load();
-            con = fmxlLoader.<ChatController>getController();
+            con = fmxlLoader.<ClientMainController>getController();
 
             Listener listener = new Listener(hostname, port, username, con);
             con.setListener(listener);
@@ -137,7 +137,7 @@ public class LoginController implements Initializable {
     }
 
     public void minimizeWindow(){
-        MainLauncher.getPrimaryStage().setIconified(true);
+        StartClient.getPrimaryStage().setIconified(true);
     }
 
     public void showErrorDialog(String message) {
