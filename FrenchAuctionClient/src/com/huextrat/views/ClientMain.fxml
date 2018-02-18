@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="700.0" maxWidth="1040.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.huextrat.chat.ChatController">
+   <children>
+      <JFXButton fx:id="buttonSend" layoutX="938.0" layoutY="657.0" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="38.0" prefWidth="91.0" ripplerFill="WHITE" style="-fx-background-radius: 10; -fx-background-color: #2196f3; -fx-border-radius: 10;" styleClass="sendbutton" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="11.0" />
+      <TextField fx:id="messageBox" layoutX="7.0" layoutY="658.0" onKeyPressed="#sendMethod" prefHeight="38.0" prefWidth="481.0" promptText="Message" style="-fx-border-radius: 0;" styleClass="messageInput" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="112.0" />
+      <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutY="301.0" pannable="true" prefHeight="352.0" prefWidth="1040.0" vvalue="1.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="301.0">
+         <content>
+            <VBox fx:id="chatPane" prefHeight="350.0" prefWidth="1038.0" />
+         </content>
+      </ScrollPane>
+      <Pane prefHeight="300.0" prefWidth="1040.0" style="-fx-background-color: #2196f3;">
+         <children>
+            <Text fx:id="txtServer" fill="WHITE" layoutX="24.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Label fx:id="usernameLabel" layoutX="14.0" layoutY="11.0" text="Username" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <VBox layoutX="14.0" layoutY="37.0" maxHeight="1.7976931348623157E308" prefHeight="248.0" prefWidth="155.0">
+               <children>
+                  <HBox fx:id="onlineUsersHbox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="217.0" style="-fx-background-radius: 4; -fx-border-radius: 4;">
+                     <children>
+                        <Label prefHeight="48.0" prefWidth="64.0" text="Users:" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Regular" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <opaqueInsets>
+                              <Insets bottom="10.0" />
+                           </opaqueInsets>
+                        </Label>
+                        <Label fx:id="onlineCountLabel" prefHeight="48.0" prefWidth="94.0" text="0" textFill="WHITE">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font name="SansSerif Regular" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <JFXListView fx:id="userList" prefHeight="224.0" prefWidth="217.0" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
+               </children>
+            </VBox>
+            <AnchorPane layoutX="254.0" layoutY="14.0" prefHeight="273.0" prefWidth="426.0" style="-fx-background-color: #ffffff; -fx-background-radius: 4; -fx-border-radius: 4;">
+               <children>
+                  <Text fx:id="time" fill="#2196f3" layoutX="212.0" layoutY="33.0" strokeWidth="0.0" text="00:00:00" textAlignment="CENTER">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutX="10.0" layoutY="46.0" prefHeight="216.0" prefWidth="406.0" style="-fx-background-color: #2196f3; -fx-background-radius: 4; -fx-border-radius: 4;">
+                     <children>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="12.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remaining time:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="nameText" fill="WHITE" layoutX="84.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" wrappingWidth="280.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="descriptionText" fill="WHITE" layoutX="129.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" wrappingWidth="270.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="endTimeText" fill="WHITE" layoutX="102.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End time:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="remainingTimeText" fill="WHITE" layoutX="166.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 second" wrappingWidth="230.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <Text fill="#2196f3" layoutX="102.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current time:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="689.0" layoutY="46.0" prefHeight="241.0" prefWidth="337.0" style="-fx-background-color: #ffffff; -fx-background-radius: 4; -fx-border-radius: 4;">
+               <children>
+                  <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="216.0" prefWidth="310.0" style="-fx-background-color: #2196f3; -fx-background-radius: 4; -fx-border-radius: 4;">
+                     <children>
+                        <Text fill="WHITE" layoutX="114.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make a bid:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField fx:id="makeBidTextField" alignment="CENTER" layoutX="88.0" layoutY="47.0" style="-fx-background-color: #ffffff;" />
+                        <Text fill="WHITE" layoutX="113.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highest bid:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="highestBidText" fill="WHITE" layoutX="5.0" layoutY="195.0" strokeWidth="0.0" text="/" textAlignment="CENTER" wrappingWidth="300.0">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <JFXButton fx:id="makeBidButton" contentDisplay="CENTER" layoutX="129.0" layoutY="87.0" onAction="#makeNewBidAction" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10;" text="Make" textFill="#2196f3">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <JFXButton fx:id="logoutButton" layoutX="780.0" layoutY="9.0" prefHeight="25.0" prefWidth="155.0" style="-fx-background-color: #ffffff;" text="Log Out" textFill="#2196f3">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
