@@ -80,41 +80,43 @@ public class Listener implements Runnable{
             connect();
             
             controller.addAsServer(new Message("admin", MessageType.SERVER, "Welcome, you have joined the server!"));
-            
-            while (socket.isConnected()) {
-                Message message = null;
-                try{
-                    message = (Message) input.readObject();
-                }
-                catch (EOFException e){
-                    duplicateUsername();
-                    break;
-                }
+
+            if(socket!=null){
+                while (socket.isConnected()) {
+                    Message message = null;
+                    try{
+                        message = (Message) input.readObject();
+                    }
+                    catch (EOFException e){
+                        duplicateUsername();
+                        break;
+                    }
 
 
-                if (message != null) {
-                    System.out.println(message.getType());
-                    switch (message.getType()) {
-                        case USER:
-                            controller.addToChat(message);
-                            break;
-                        case SERVER:
-                            controller.addAsServer(message);
-                            break;
-                        case CONNECTED:
-                            controller.setUserList(message);
-                            controller.addAsServer(message);
-                            break;
-                        case DISCONNECTED:
-                            controller.addAsServer(new Message("admin", MessageType.SERVER, "An user has logged out!"));
-                            controller.setUserList(message);
-                            break;
-                        case NEWITEM:
-                            controller.addToItem(message);
-                            break;
-                        case NEWHIGHESTBID:
-                            controller.newHighestBid(message);
-                            break;
+                    if (message != null) {
+                        System.out.println(message.getType());
+                        switch (message.getType()) {
+                            case USER:
+                                controller.addToChat(message);
+                                break;
+                            case SERVER:
+                                controller.addAsServer(message);
+                                break;
+                            case CONNECTED:
+                                controller.setUserList(message);
+                                controller.addAsServer(message);
+                                break;
+                            case DISCONNECTED:
+                                controller.addAsServer(new Message("admin", MessageType.SERVER, "An user has logged out!"));
+                                controller.setUserList(message);
+                                break;
+                            case NEWITEM:
+                                controller.addToItem(message);
+                                break;
+                            case NEWHIGHESTBID:
+                                controller.newHighestBid(message);
+                                break;
+                        }
                     }
                 }
             }
@@ -148,7 +150,9 @@ public class Listener implements Runnable{
         createMessage.setName(username);
         createMessage.setType(CONNECTED);
         createMessage.setMsg(HASCONNECTED);
-        oos.writeObject(createMessage);
+        if(oos!=null){
+            oos.writeObject(createMessage);
+        }
     }
     
     public void duplicateUsername() {

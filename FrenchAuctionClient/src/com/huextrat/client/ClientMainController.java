@@ -268,10 +268,12 @@ public class ClientMainController implements Initializable {
         this.usernameLabel.setText(username);
     }
 
+    @SuppressWarnings("unchecked")
     public void setUserList(Message msg) {
         Platform.runLater(() -> {
             ObservableList<User> users = FXCollections.observableList(msg.getUsers());
             ObservableList<String> listUserName = FXCollections.observableArrayList();
+            
             users.forEach((u) -> {
                 listUserName.add(u.getName());
             });

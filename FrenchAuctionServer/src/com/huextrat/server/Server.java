@@ -340,6 +340,7 @@ public class Server {
         
     }
     
+    @SuppressWarnings("unchecked")
     private static void updateUsersListUI(){
         Platform.runLater(() -> {
             ObservableList<String> listUserName = FXCollections.observableArrayList();
