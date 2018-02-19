@@ -32,7 +32,10 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
@@ -87,6 +90,7 @@ public class Server {
         this.con = con;
 
         listener = new ServerSocket(port);
+        updateUI(new Message("INFO", MessageType.SERVER, "Server is started"), Color.GREEN);
 
         try {
             while (true) {
@@ -272,6 +276,10 @@ public class Server {
                     writer.reset();
                 }
             }
+            else {
+                write(new Message("SERVER", MessageType.SERVER, "This auction is now closed!"));
+                write(new Message("SERVER", MessageType.SERVER, "No one wins this auction!"));
+            }
         }
 
         public static void write(Message msg) throws IOException {
@@ -350,8 +358,11 @@ public class Server {
             () -> {
                 CornerRadii corn = new CornerRadii(10);
                 Insets ins = new Insets(5);
+                
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date date = new Date();
 
-                Label lab = new Label(msg.getName()+": "+msg.getMsg());
+                Label lab = new Label(dateFormat.format(date)+" - "+msg.getName()+": "+msg.getMsg());
                 lab.setWrapText(true);
                 lab.setBackground(new Background(new BackgroundFill(color, corn, null)));
                 lab.setTextFill(Color.WHITE);
