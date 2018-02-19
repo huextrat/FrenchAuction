@@ -11,7 +11,6 @@
 
 <div align="center">
   <a href="https://opensource.org/licenses/MIT">
-    <img src="https://cdn.worldvectorlogo.com/logos/netbeans-1.svg" alt="Netbeans Dev" />
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License MIT" />
   </a>
 </div>
