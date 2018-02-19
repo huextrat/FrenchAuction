@@ -24,5 +24,5 @@
 </div>
 
 <div align="center">
-  <img src="https://hugoextrat.com/images/serverlogin.png"/>
+  <img src="https://hugoextrat.com/images/serverimage.png"/>
 </div>
