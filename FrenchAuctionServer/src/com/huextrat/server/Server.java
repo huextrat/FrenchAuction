@@ -23,6 +23,7 @@
  */
 package com.huextrat.server;
 
+import com.huextrat.item.Item;
 import com.huextrat.messages.Message;
 import com.huextrat.messages.MessageType;
 import com.huextrat.messages.User;
@@ -109,7 +110,10 @@ public class Server {
         private InputStream is;
         
         private static int startBid = 0;
-        public static final NavigableMap<Integer, String> itemBid = new TreeMap<>();
+        public static NavigableMap<Integer, String> itemBid = new TreeMap<>();
+        
+        public static boolean isCurrentAuction = false;
+        public static Item currentItem;
 
 
         public Handler(Socket socket) throws IOException {
@@ -134,6 +138,11 @@ public class Server {
                 writers.add(output);
                 addToList(firstMessage);
                 
+                if(isCurrentAuction){
+                    output.writeObject((new Message("SEVER", MessageType.NEWITEM, currentItem)));
+                    output.reset();
+                }
+                
                 while (socket.isConnected()) {
                     Message inputmsg = (Message) input.readObject();
                     if (inputmsg != null) {
@@ -145,6 +154,7 @@ public class Server {
                                 break;
                             case CONNECTED:
                                 addToList(inputmsg);
+                                
                                 break;
                             case NEWBID:
                                 
@@ -267,6 +277,8 @@ public class Server {
         public static void write(Message msg) throws IOException {
             if(msg.getType().equals(MessageType.NEWITEM)){
                 //itemBid.put(msg.getItem().getHighestBid(), "SERVER");
+                isCurrentAuction = true;
+                currentItem = msg.getItem();
                 startBid = msg.getItem().getHighestBid();
             }
             if(msg.getType().equals(MessageType.SERVER)){
