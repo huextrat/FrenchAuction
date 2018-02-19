@@ -31,7 +31,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,7 +47,7 @@ import javafx.stage.Stage;
  */
 public class ServerLoginController implements Initializable {
     
-    private Stage stage;
+    // UI ELEMENTS
     @FXML private JFXTextField txtServerAddress;
     @FXML private JFXTextField txtPort;
     @FXML private JFXButton buttonCreateServer;
@@ -63,6 +62,10 @@ public class ServerLoginController implements Initializable {
         });
     }
     
+    /**
+     * Called when we start the server
+     * @param event 
+     */
     @FXML
     public void createServer(ActionEvent event) {
 

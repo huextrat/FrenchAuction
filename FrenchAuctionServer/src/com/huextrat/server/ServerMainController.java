@@ -67,25 +67,23 @@ import javafx.util.Duration;
  */
 public class ServerMainController implements Initializable {
 
+    // UI ELEMENTS
     @FXML private Text time;
     @FXML private JFXTextField itemName, itemDescription, startBidTextField;
     @FXML private JFXTimePicker endTimePicker;
     @FXML private TextField messageBox;
     @FXML private JFXButton buttonSend;
-    
     @FXML private Text nameText, descriptionText, endTimeText, remainingTimeText;
-    //highestBidText;
-    
-    @FXML Label onlineCountLabel;
-    @FXML JFXListView userList;
     
     @FXML ScrollPane scrollPane;
+    @FXML Label onlineCountLabel;
+    @FXML JFXListView userList;
     @FXML VBox chatPane;
     
-    private Server server;
     private String serverAddress;
     private int serverPort;
     
+    // VARIABLE FOR TIME
     private int minute;
     private int hour;
     private int second;
@@ -93,10 +91,6 @@ public class ServerMainController implements Initializable {
     private ServerMainController con;
 
     private Timeline timeline = null;
-    
-    public void setController(ServerMainController con){
-        this.con = con;
-    }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -134,6 +128,10 @@ public class ServerMainController implements Initializable {
        
     }
     
+    public void setController(ServerMainController con){
+        this.con = con;
+    }
+    
     void setServerAdress(String serverAddress) {
         this.serverAddress = serverAddress;
     }
@@ -147,7 +145,7 @@ public class ServerMainController implements Initializable {
             @Override
             public void run() {
                 try {
-                    server = new Server(serverAddress, serverPort, con);
+                    Server server = new Server(serverAddress, serverPort, con);
                 } catch (IOException ex) {
                     System.out.println(ex);
                 }

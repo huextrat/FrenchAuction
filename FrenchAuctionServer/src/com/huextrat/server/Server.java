@@ -62,30 +62,20 @@ import javafx.scene.text.Font;
 public class Server {
 
     private ServerSocket listener;
-    
-    
+
     private static ServerMainController con;
     
     private static final HashMap<String, User> names = new HashMap<>();
     private static final HashSet<ObjectOutputStream> writers = new HashSet<>();
     private static final ArrayList<User> users = new ArrayList<>();
 
-    public HashMap<String, User> getNames() {
-        return names;
-    }
-    
-    public ServerSocket getListener(){
-        return listener;
-    }
-
-    public HashSet<ObjectOutputStream> getWriters() {
-        return writers;
-    }
-
-    public ArrayList<User> getUsers() {
-        return users;
-    }
-
+    /**
+     * Create a server
+     * @param address
+     * @param port
+     * @param con
+     * @throws IOException 
+     */
     Server(String address, int port, ServerMainController con) throws IOException{
         this.con = con;
 
@@ -103,10 +93,26 @@ public class Server {
         
     }
     
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+    
+    public HashMap<String, User> getNames() {
+        return names;
+    }
+    
+    public ServerSocket getListener(){
+        return listener;
+    }
+
+    public HashSet<ObjectOutputStream> getWriters() {
+        return writers;
+    }
 
     public static class Handler extends Thread {
+        
         private String name;
-        private final Socket socket;
+        private Socket socket;
         private User user;
         private ObjectInputStream input;
         private OutputStream os;
@@ -114,12 +120,16 @@ public class Server {
         private InputStream is;
         
         private static int startBid = 0;
-        public static NavigableMap<Integer, String> itemBid = new TreeMap<>();
         
+        public static NavigableMap<Integer, String> itemBid = new TreeMap<>();
         public static boolean isCurrentAuction = false;
         public static Item currentItem;
 
-
+        /**
+         * Create handler with socket
+         * @param socket
+         * @throws IOException 
+         */
         public Handler(Socket socket) throws IOException {
             this.socket = socket;
         }
@@ -199,9 +209,12 @@ public class Server {
             }
         }
 
-        private synchronized void checkDuplicateUsername(Message firstMessage) throws Exception {
-            //logger.info(firstMessage.getName() + " is trying to connect");
-            
+        /**
+         * Check if the username is already used by another user
+         * @param firstMessage
+         * @throws Exception 
+         */
+        private synchronized void checkDuplicateUsername(Message firstMessage) throws Exception {            
             if (!names.containsKey(firstMessage.getName())) {
                 this.name = firstMessage.getName();
                 user = new User();
@@ -211,32 +224,40 @@ public class Server {
                 users.add(user);
                 names.put(name, user);
 
-                //logger.info(name + " has been added to the list");
                 Message messageConnected = new Message(name, MessageType.USER, "is connected: "+user.getIp());
                 updateUI(messageConnected, Color.GREEN);
             } else {
-                //logger.error(firstMessage.getName() + " is already connected");
                 Message messageConnected = new Message(firstMessage.getName(), MessageType.USER, "is already connected.");
                 updateUI(messageConnected, Color.RED);
                 throw new Exception(firstMessage.getName() + " is already connected");
             }
         }
 
+        /**
+         * Remove user when he is disconnected
+         * @return
+         * @throws IOException 
+         */
         private static Message removeFromList() throws IOException {
             
             updateUsersListUI();
             
-            //logger.debug("removeFromList() method Enter");
             Message msg = new Message();
             msg.setMsg("has left.");
             msg.setType(MessageType.DISCONNECTED);
             msg.setName("SERVER");
             msg.setUserlist(names);
             write(msg);
-            //logger.debug("removeFromList() method Exit");
+            
             return msg;
         }
 
+        /**
+         * Add user to the list
+         * @param msg
+         * @return
+         * @throws IOException 
+         */
         public static Message addToList(Message msg) throws IOException {
             
             updateUsersListUI();
@@ -245,21 +266,14 @@ public class Server {
             msg.setType(MessageType.CONNECTED);
             msg.setName("SERVER");
             write(msg);
+            
             return msg;
         }
         
-        public static Message addNewUser() throws IOException{
-            
-            updateUsersListUI();
-            
-            Message msg = new Message();
-            msg.setMsg("New user joined the server!");
-            msg.setType(MessageType.SERVER);
-            msg.setName("SERVER");
-            write(msg);
-            return msg;
-        }
-        
+        /**
+         * Send a message to all clients when auction is ended with the winner
+         * @throws IOException 
+         */
         public static void sendWinner() throws IOException{
             if(!itemBid.isEmpty()){
                 Entry<Integer, String> lastEntry = itemBid.lastEntry();
@@ -282,6 +296,11 @@ public class Server {
             }
         }
 
+        /**
+         * Write a message to all connected users
+         * @param msg
+         * @throws IOException 
+         */
         public static void write(Message msg) throws IOException {
             if(msg.getType().equals(MessageType.NEWITEM)){
                 //itemBid.put(msg.getItem().getHighestBid(), "SERVER");
@@ -302,6 +321,9 @@ public class Server {
             }
         }
         
+        /**
+         * Close connection when an user logout
+         */
         public synchronized void closeConnections()  {
             if (name != null) {
                 names.remove(name);
@@ -340,6 +362,9 @@ public class Server {
         
     }
     
+    /**
+     * Update the users list
+     */
     @SuppressWarnings("unchecked")
     private static void updateUsersListUI(){
         Platform.runLater(() -> {
@@ -354,6 +379,11 @@ public class Server {
         });
     }
     
+    /**
+     * Write message in the server chat
+     * @param msg
+     * @param color 
+     */
     public static void updateUI(Message msg, Color color){
         Platform.runLater(
             () -> {

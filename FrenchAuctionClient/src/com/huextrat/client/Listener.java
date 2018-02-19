@@ -40,25 +40,40 @@ import javafx.scene.control.Alert;
  */
 public class Listener implements Runnable{
 
-    private final String HASCONNECTED = "has connected";
-
+    private final ClientMainController controller;
+    private final LoginController logController;
+    
+    private final String hostname;
+    private final int port;
+    private final String username;
+    
     private Socket socket;
-    public String hostname;
-    public int port;
-    public String username;
-    public ClientMainController controller;
+
     private ObjectOutputStream oos;
     private InputStream is;
     private ObjectInputStream input;
     private OutputStream outputStream;
 
-    public Listener(String hostname, int port, String username, ClientMainController controller) {
+    /**
+     * Set listener for client
+     * @param hostname
+     * @param port
+     * @param username
+     * @param controller
+     * @param logController 
+     */
+    public Listener(String hostname, int port, String username, ClientMainController controller, LoginController logController) {
         this.hostname = hostname;
         this.port = port;
         this.username = username;
         this.controller = controller;
+        this.logController = logController;
     }
     
+    /**
+     * Return the socket
+     * @return 
+     */
     public Socket getSocket(){
         return socket;
     }
@@ -67,13 +82,13 @@ public class Listener implements Runnable{
     public void run() {
         try {
             socket = new Socket(hostname, port);
-            LoginController.getInstance().showScene();
+            logController.showScene();
             outputStream = socket.getOutputStream();
             oos = new ObjectOutputStream(outputStream);
             is = socket.getInputStream();
             input = new ObjectInputStream(is);
         } catch (IOException e) {
-            LoginController.getInstance().showErrorDialog("Could not connect to server");
+            logController.showErrorDialog("Could not connect to server");
         }
 
         try {
@@ -121,11 +136,15 @@ public class Listener implements Runnable{
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            //e.printStackTrace();
             controller.logoutScene();
         }
     }
     
+    /**
+     * Send to server new bid message
+     * @param i
+     * @throws IOException 
+     */
     public void newBid(int i) throws IOException{
         Message createMessage = new Message();
         createMessage.setName(username);
@@ -135,7 +154,11 @@ public class Listener implements Runnable{
         oos.flush();
     }
 
-
+    /**
+     * Send to server a message
+     * @param msg
+     * @throws IOException 
+     */
     public void send(String msg) throws IOException {
         Message createMessage = new Message();
         createMessage.setName(username);
@@ -145,16 +168,23 @@ public class Listener implements Runnable{
         oos.flush();
     }
 
+    /**
+     * Send to server new client is connected
+     * @throws IOException 
+     */
     public void connect() throws IOException {
         Message createMessage = new Message();
         createMessage.setName(username);
         createMessage.setType(CONNECTED);
-        createMessage.setMsg(HASCONNECTED);
+        createMessage.setMsg("has connected");
         if(oos!=null){
             oos.writeObject(createMessage);
         }
     }
     
+    /**
+     * Called if client username is already used
+     */
     public void duplicateUsername() {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.ERROR, "This username is not available!");

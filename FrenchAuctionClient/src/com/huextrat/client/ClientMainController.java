@@ -62,6 +62,7 @@ import javafx.scene.text.Text;
  */
 public class ClientMainController implements Initializable {
 
+    // UI ELEMENTS
     @FXML private TextField messageBox;
     @FXML private Label usernameLabel;
     @FXML private Label onlineCountLabel;
@@ -74,6 +75,7 @@ public class ClientMainController implements Initializable {
     @FXML private Text highestBidText;
     @FXML private ScrollPane scrollPane;
     
+    // VARIABLE FOR TIME
     private int minute;
     private int hour;
     private int second;
@@ -81,6 +83,11 @@ public class ClientMainController implements Initializable {
     private Listener listener;
     private Timeline timeline = null;
 
+    /**
+     * Initialize the client main controller
+     * @param location
+     * @param resources 
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
@@ -121,22 +128,35 @@ public class ClientMainController implements Initializable {
         }
     }
     
+    /**
+     * Set listener
+     * @param listener 
+     */
     public void setListener(Listener listener){
         this.listener = listener;
     }
     
+    /**
+     * Disable make a bid option
+     */
     public void disableMakeABid(){
         makeBidButton.setDisable(true);
         makeBidTextField.setDisable(true);
         highestBidText.setText("0");
     }
     
+    /**
+     * Enable make a bid option
+     */
     public void enableMakeABid(){
         makeBidButton.setDisable(false);
         makeBidTextField.setDisable(false);
     }
     
-    
+    /**
+     * Called when a client send a message
+     * @throws IOException 
+     */
     public void sendButtonAction() throws IOException {
         String msg = messageBox.getText();
         if (!messageBox.getText().isEmpty()) {
@@ -145,6 +165,11 @@ public class ClientMainController implements Initializable {
         }
     }
     
+    /**
+     * Called when a client make a new bid
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     public void makeNewBidAction(ActionEvent event) throws IOException{
         int bid = Integer.parseInt(makeBidTextField.getText());
@@ -152,19 +177,25 @@ public class ClientMainController implements Initializable {
         makeBidTextField.clear();
     }
     
+    /**
+     * Edit the highest bid for the current auction
+     * @param msg 
+     */
     public synchronized void newHighestBid(Message msg){
         highestBidText.setText(msg.getMsg());
         int highestbid = Integer.parseInt(msg.getMsg())+1;
         makeBidTextField.setText(highestbid+"");
     }
 
+    /**
+     * Add an item when server make a new auction
+     * @param msg 
+     */
     public synchronized void addToItem(Message msg){
-        
         if(timeline != null){
             timeline.stop();
         }
-        
-        
+
         nameText.setText("");
         descriptionText.setText("");
         endTimeText.setText("");
@@ -209,8 +240,11 @@ public class ClientMainController implements Initializable {
         enableMakeABid();
     }
     
+    /**
+     * Add message in the chat
+     * @param msg 
+     */
     public synchronized void addToChat(Message msg) {
-
         if (msg.getName().equals(usernameLabel.getText())) {
             Platform.runLater(
                 () -> {
@@ -235,7 +269,6 @@ public class ClientMainController implements Initializable {
                     chatPane.setSpacing(10);
                 }
             );
-
         } else {
             Platform.runLater(
                 () -> {
@@ -261,37 +294,14 @@ public class ClientMainController implements Initializable {
                 }
             );
         }
-        
         Platform.runLater( () -> scrollPane.vvalueProperty().bind(chatPane.heightProperty()));
     }
-    public void setUsernameLabel(String username) {
-        this.usernameLabel.setText(username);
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setUserList(Message msg) {
-        Platform.runLater(() -> {
-            ObservableList<User> users = FXCollections.observableList(msg.getUsers());
-            ObservableList<String> listUserName = FXCollections.observableArrayList();
-            
-            users.forEach((u) -> {
-                listUserName.add(u.getName());
-            });
-            
-            userList.setItems(listUserName);
-            onlineCountLabel.setText(String.valueOf(listUserName.size()));
-        });
-    }
-
-
-    public void sendMethod(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.ENTER) {
-            sendButtonAction();
-        }
-    }
-
+    
+    /**
+     * Add a message when a server sent a message
+     * @param msg 
+     */
     public synchronized void addAsServer(Message msg) {
-        
         Platform.runLater(
                 () -> {
                     CornerRadii corn = new CornerRadii(10);
@@ -318,6 +328,49 @@ public class ClientMainController implements Initializable {
         Platform.runLater( () -> scrollPane.vvalueProperty().bind(chatPane.heightProperty()));
     }
     
+    /**
+     * Set client username
+     * @param username 
+     */
+    public void setUsernameLabel(String username) {
+        this.usernameLabel.setText(username);
+    }
+
+    /**
+     * Edit the users list
+     * @param msg 
+     */
+    @SuppressWarnings("unchecked")
+    public void setUserList(Message msg) {
+        Platform.runLater(() -> {
+            ObservableList<User> users = FXCollections.observableList(msg.getUsers());
+            ObservableList<String> listUserName = FXCollections.observableArrayList();
+            
+            users.forEach((u) -> {
+                listUserName.add(u.getName());
+            });
+            
+            userList.setItems(listUserName);
+            onlineCountLabel.setText(String.valueOf(listUserName.size()));
+        });
+    }
+
+    /**
+     * Called when client press "Enter" in the message box
+     * @param event
+     * @throws IOException 
+     */
+    public void sendMethod(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.ENTER) {
+            sendButtonAction();
+        }
+    }
+
+    
+    /**
+     * Called when a client pressed logout button
+     */
+    @FXML
     public void logoutButtonPressed(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -342,6 +395,9 @@ public class ClientMainController implements Initializable {
         });
     }
 
+    /**
+     * Called when the server is closed
+     */
     public void logoutScene() {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.ERROR, "The server has been shut down!");

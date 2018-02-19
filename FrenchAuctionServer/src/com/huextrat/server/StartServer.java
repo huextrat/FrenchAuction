@@ -39,6 +39,11 @@ import javafx.stage.WindowEvent;
  */
 public class StartServer extends Application {
     
+    /**
+     * Start the server login view
+     * @param stage
+     * @throws IOException 
+     */
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("com/huextrat/views/ServerLogin.fxml"));

@@ -36,7 +36,14 @@ public class Item implements Serializable {
     
     public Item(){}
     
-     public Item(String name, String description, int endTime, int startBid){
+    /**
+     * Set an item
+     * @param name
+     * @param description
+     * @param endTime
+     * @param startBid 
+     */
+    public Item(String name, String description, int endTime, int startBid){
         this.name = name;
         this.description = description;
         this.endTime = endTime;

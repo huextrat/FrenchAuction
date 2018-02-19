@@ -46,12 +46,24 @@ public class Message implements Serializable {
     public Message() {
     }
     
+    /**
+     * Create message with a message
+     * @param name
+     * @param type
+     * @param msg 
+     */
     public Message(String name, MessageType type, String msg){
         this.name = name;
         this.type = type;
         this.msg = msg;
     }
     
+    /**
+     * Create message with an item
+     * @param name
+     * @param type
+     * @param item 
+     */
     public Message(String name, MessageType type, Item item){
         this.name = name;
         this.type = type;

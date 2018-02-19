@@ -34,10 +34,14 @@ import javafx.stage.Stage;
  * 
  * @author huextrat <extrat.h@gmail.com> <www.hugoextrat.com>
  */
+
 public class StartClient extends Application {
 
-    private static Stage primaryStageObj;
-
+    /**
+     * Start the client login view
+     * @param primaryStage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -57,9 +61,5 @@ public class StartClient extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public static Stage getPrimaryStage() {
-        return primaryStageObj;
     }
 }

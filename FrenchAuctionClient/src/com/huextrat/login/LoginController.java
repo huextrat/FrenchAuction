@@ -49,21 +49,20 @@ import javafx.scene.paint.Color;
  */
 public class LoginController implements Initializable {
 
-    @FXML public  JFXTextField hostnameTextField;
+    // UI ELEMENTS
+    @FXML private  JFXTextField hostnameTextField;
     @FXML private JFXTextField portTextField;
     @FXML private JFXTextField usernameTextField;
-    public static ClientMainController con;
+    
+
+    private ClientMainController cliController;
+    private LoginController logController;
     private Scene scene;
 
-    private static LoginController instance;
-
     public LoginController() {
-        instance = this;
+        logController = this;
     }
 
-    public static LoginController getInstance() {
-        return instance;
-    }
     public void loginButtonAction() throws IOException {
         
         if(usernameTextField.getText().isEmpty()){
@@ -95,10 +94,10 @@ public class LoginController implements Initializable {
 
             FXMLLoader fmxlLoader = new FXMLLoader(getClass().getClassLoader().getResource("com/huextrat/views/ClientMain.fxml"));
             Parent window = (Pane) fmxlLoader.load();
-            con = fmxlLoader.<ClientMainController>getController();
+            cliController = fmxlLoader.<ClientMainController>getController();
 
-            Listener listener = new Listener(hostname, port, username, con);
-            con.setListener(listener);
+            Listener listener = new Listener(hostname, port, username, cliController, logController);
+            cliController.setListener(listener);
             Thread x = new Thread(listener);
             x.start();
             this.scene = new Scene(window);
@@ -117,7 +116,7 @@ public class LoginController implements Initializable {
             stage.setScene(this.scene);
             stage.setTitle("FrenchAuction - Client");
             stage.centerOnScreen();
-            con.setUsernameLabel(usernameTextField.getText());
+            cliController.setUsernameLabel(usernameTextField.getText());
         });
     }
 
@@ -134,10 +133,6 @@ public class LoginController implements Initializable {
     public void closeSystem(){
         Platform.exit();
         System.exit(0);
-    }
-
-    public void minimizeWindow(){
-        StartClient.getPrimaryStage().setIconified(true);
     }
 
     public void showErrorDialog(String message) {
