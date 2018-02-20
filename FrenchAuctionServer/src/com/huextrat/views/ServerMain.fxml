@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="700.0" maxWidth="1040.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.huextrat.server.ServerMainController">
+<AnchorPane maxHeight="700.0" maxWidth="1040.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.huextrat.server.ServerMainController">
    <children>
       <JFXButton fx:id="buttonSend" layoutX="938.0" layoutY="657.0" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="38.0" prefWidth="91.0" ripplerFill="WHITE" style="-fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: #2196f3; -fx-border-radius: 10;" styleClass="sendbutton" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="11.0" />
       <TextField fx:id="messageBox" layoutX="7.0" layoutY="658.0" onKeyPressed="#sendMethod" prefHeight="38.0" prefWidth="481.0" promptText="Message" style="-fx-border-radius: 0;" styleClass="messageInput" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="112.0" />
@@ -109,6 +109,16 @@
                            </font>
                         </Text>
                         <Text fx:id="remainingTimeText" fill="WHITE" layoutX="166.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 seconds">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highest bid:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="highestBidText" fill="WHITE" layoutX="129.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                            <font>
                               <Font size="20.0" />
                            </font>

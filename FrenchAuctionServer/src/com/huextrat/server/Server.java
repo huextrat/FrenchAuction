@@ -178,6 +178,7 @@ public class Server {
                                         write(new Message("SERVER", MessageType.SERVER, inputmsg.getName()+" has bidded at "+inputmsg.getMsg()));
                                         Message newHighestBid = new Message("SERVER", MessageType.NEWHIGHESTBID, Integer.parseInt(inputmsg.getMsg())+"");
                                         write(newHighestBid);
+                                        con.highestBidText.setText(inputmsg.getMsg());
                                     }
                                     else {
                                         output.writeObject(new Message("SERVER", MessageType.SERVER, "Bid too low!"));
@@ -190,6 +191,7 @@ public class Server {
                                         write(new Message("SERVER", MessageType.SERVER, inputmsg.getName()+" has bidded at "+inputmsg.getMsg()));
                                         Message newHighestBid = new Message("SERVER", MessageType.NEWHIGHESTBID, Integer.parseInt(inputmsg.getMsg())+"");
                                         write(newHighestBid);
+                                        con.highestBidText.setText(inputmsg.getMsg());
                                     }
                                     else {
                                         output.writeObject(new Message("SERVER", MessageType.SERVER, "Bid too low!"));

@@ -75,6 +75,8 @@ public class ServerMainController implements Initializable {
     @FXML private JFXButton buttonSend;
     @FXML private Text nameText, descriptionText, endTimeText, remainingTimeText;
     
+    @FXML Text highestBidText;
+    
     @FXML ScrollPane scrollPane;
     @FXML Label onlineCountLabel;
     @FXML JFXListView userList;
@@ -203,6 +205,7 @@ public class ServerMainController implements Initializable {
 
             nameText.setText(msgItem.getItem().getName());
             descriptionText.setText(msgItem.getItem().getDescription());
+            highestBidText.setText(msgItem.getItem().getHighestBid()+"");
 
             int i = msgItem.getItem().getEndTime();
             int hours = i /3600;
