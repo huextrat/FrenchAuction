@@ -31,6 +31,6 @@
   </h3>
 </div>
 
-<div align="center">
+<div align="center" style="font-size:50%">
   <img src="https://hugoextrat.com/images/serverimage.png"/>
 </div>
