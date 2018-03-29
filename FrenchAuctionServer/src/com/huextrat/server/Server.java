@@ -153,7 +153,7 @@ public class Server {
                 addToList(firstMessage);
                 
                 if(isCurrentAuction){
-                    output.writeObject((new Message("SEVER", MessageType.NEWITEM, currentItem)));
+                    output.writeObject((new Message("SERVER", MessageType.NEWITEM, currentItem)));
                     output.reset();
                 }
                 
@@ -175,7 +175,7 @@ public class Server {
                                 if(itemBid.isEmpty()){
                                     if(Integer.parseInt(inputmsg.getMsg()) > startBid){
                                         itemBid.put(Integer.parseInt(inputmsg.getMsg()), inputmsg.getName());
-                                        write(new Message("SERVER", MessageType.SERVER, inputmsg.getName()+" has bidded at "+inputmsg.getMsg()));
+                                        write(new Message("SERVER", MessageType.SERVER, inputmsg.getName()+" has bidded at £"+inputmsg.getMsg()));
                                         Message newHighestBid = new Message("SERVER", MessageType.NEWHIGHESTBID, Integer.parseInt(inputmsg.getMsg())+"");
                                         write(newHighestBid);
                                         con.highestBidText.setText(inputmsg.getMsg());
@@ -188,7 +188,7 @@ public class Server {
                                 else {
                                     if(itemBid.lastEntry().getKey() < Integer.parseInt(inputmsg.getMsg())){
                                         itemBid.put(Integer.parseInt(inputmsg.getMsg()), inputmsg.getName());
-                                        write(new Message("SERVER", MessageType.SERVER, inputmsg.getName()+" has bidded at "+inputmsg.getMsg()));
+                                        write(new Message("SERVER", MessageType.SERVER, inputmsg.getName()+" has bidded at £"+inputmsg.getMsg()));
                                         Message newHighestBid = new Message("SERVER", MessageType.NEWHIGHESTBID, Integer.parseInt(inputmsg.getMsg())+"");
                                         write(newHighestBid);
                                         con.highestBidText.setText(inputmsg.getMsg());
@@ -284,7 +284,7 @@ public class Server {
                 Message messageAuctionClosed = new Message("SERVER", MessageType.SERVER, "This auction is now closed!");
                 updateUI(messageAuctionClosed, Color.ORANGE);
                 
-                Message messageWinner = new Message("SERVER", MessageType.SERVER, lastEntry.getValue()+" wins this auction with a "+lastEntry.getKey()+" bid");
+                Message messageWinner = new Message("SERVER", MessageType.SERVER, lastEntry.getValue()+" wins this auction with a £"+lastEntry.getKey()+" bid");
                 updateUI(messageWinner, Color.ORANGE);
                 for (ObjectOutputStream writer : writers) {
                     writer.writeObject(messageAuctionClosed);

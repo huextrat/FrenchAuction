@@ -194,6 +194,7 @@ public class ServerMainController implements Initializable {
             Server.Handler.write(msg);
 
             Message msgItem = new Message("SERVER", MessageType.NEWITEM, item);
+            
             Server.Handler.write(msgItem);
 
             itemName.setText("");

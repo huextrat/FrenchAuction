@@ -167,6 +167,11 @@ public class Listener implements Runnable{
         oos.writeObject(createMessage);
         oos.flush();
     }
+    
+    public void iDisconnected(Message msg) throws IOException{
+        oos.writeObject(msg);
+        oos.flush();
+    }
 
     /**
      * Send to server new client is connected

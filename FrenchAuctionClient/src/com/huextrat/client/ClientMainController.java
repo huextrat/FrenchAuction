@@ -27,6 +27,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import com.huextrat.messages.Message;
+import com.huextrat.messages.MessageType;
 import com.huextrat.messages.User;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -47,6 +48,8 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -123,6 +126,17 @@ public class ClientMainController implements Initializable {
             }
         });
         
+        makeBidTextField.addEventFilter(KeyEvent.KEY_PRESSED, ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    makeNewBidAction();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                ke.consume();
+            }
+        });
+        
         if(timeline == null){
             disableMakeABid();
         }
@@ -171,7 +185,7 @@ public class ClientMainController implements Initializable {
      * @throws IOException 
      */
     @FXML
-    public void makeNewBidAction(ActionEvent event) throws IOException{
+    public void makeNewBidAction() throws IOException{
         int bid = Integer.parseInt(makeBidTextField.getText());
         listener.newBid(bid);
         makeBidTextField.clear();
@@ -385,8 +399,14 @@ public class ClientMainController implements Initializable {
                         Alert alertDc = new Alert(Alert.AlertType.INFORMATION, "You are disconnected!");
                         alertDc.setHeaderText("Log out!");
                         alertDc.showAndWait();
-                        Platform.exit();
-                        System.exit(0);
+                        try {
+                            listener.iDisconnected(new Message(usernameLabel.getText(), MessageType.DISCONNECTED, "BYE"));
+                            
+                            Platform.exit();
+                            System.exit(0);
+                        } catch (IOException ex) {
+                            Logger.getLogger(ClientMainController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     });
                 } else if (type.getButtonData().equals(okButton.getButtonData())) {
                     
@@ -408,9 +428,4 @@ public class ClientMainController implements Initializable {
         });
     }
     
-    @FXML
-    public void closeApplication() {
-        Platform.exit();
-        System.exit(0);
-    }
 }
